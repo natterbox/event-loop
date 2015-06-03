@@ -218,7 +218,9 @@ class StreamSelectLoop implements LoopInterface
         $read  = $this->readStreams;
         $write = $this->writeStreams;
 
-        $this->streamSelect($read, $write, $timeout);
+        if (false === $this->streamSelect($read, $write, $timeout)) {
+            return;
+        }
 
         foreach ($read as $stream) {
             $key = (int) $stream;
